@@ -1,0 +1,7 @@
+#Family ID	Individual ID	Paternal ID	Maternal ID	Gender	Phenotype
+bwa+gatk	HG003	0	0	1	-9
+bwa+gatk	HG004	0	0	2	-9
+bwa+gatk	NA24385	HG003	HG004	1	-9
+gral+hc	4:HG003	0	0	1	-9
+gral+hc	5:HG004	0	0	2	-9
+gral+hc	6:NA24385	4:HG003	5:HG004	1	-9

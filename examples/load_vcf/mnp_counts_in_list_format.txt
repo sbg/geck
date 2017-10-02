@@ -1,0 +1,1 @@
+father1	mother1	child1	father2	mother2	child2	count

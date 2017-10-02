@@ -1,0 +1,17 @@
+*.aux
+*.log
+*.out
+*.synctex.gz
+*.toc
+
+*.pyc
+
+*/.idea/*
+.ipynb_checkpoints/*
+ipython_notebooks/*
+.cache/
+_build/
+docs/sphinx_docs/api/
+
+VERSION
+geck.egg-info
