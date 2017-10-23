@@ -1,6 +1,6 @@
 See Manuscript for detailed description.
 
-Genotype Error Comparator Kit is implmented as a python package ```geck```, which allows comparing the performance of two genotyping tools by their predictions on a family trio. It requires a joint histogram of genotype trio calls as input, and it fits a statistical mixture model and estimates the posterior dsitributions of genotype confusion matrices and benchmarking metrics: precision, recall, F-score.
+Genotype Error Comparator Kit is implemented as a python package ```geck```, which allows comparing the performance of two genotyping tools by their predictions on a family trio. It requires a joint histogram of genotype trio calls as input, and it fits a statistical mixture model and estimates the posterior distributions of genotype confusion matrices and benchmarking metrics: precision, recall, F-score.
 The image below illustrates the data processing pipeline involved. ```geck``` performs the steps marked by (b) and (c).
 
 ![](./overview.png)
