@@ -16,6 +16,24 @@
 # This is called "purging".
 # The output are the purged versions of the input files.
 
+
+# geck: Genotype Error Comparator Kit, for benchmarking genotyping tools
+# Copyright (C) 2017 Seven Bridges Genomics Inc.
+
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <https://www.gnu.org/licenses/>.
+
+
 """Usage:
     run_fastq_purge [--debug] <fq1_in> <fq2_in> [(-o <fq1_out> <fq2_out>)]
 """

@@ -1,35 +1,49 @@
 #!/usr/bin/env python
 
-"""
-This script sanitizes the genotype combinations counts:
- - removes multiallelic counts
- - disregards phasing (aggregates over them)
- - assumes reference allele for missing genotypes (i.e. '.' == '0')
+# This script sanitizes the genotype combinations counts:
+#  - removes multiallelic counts
+#  - disregards phasing (aggregates over them)
+#  - assumes reference allele for missing genotypes (i.e. '.' == '0')
 
-Inputs:
--------
- * tool1: name of first variant determination pipeline
- * tool2: name of second variant determination pipeline
- * a tab-separated file listing the aggregate counts
-   of different genotype combinations in a 6-sample vcf, and
- * a pedigree file, storing the relationships of the samples
-   (family IDs are the tool names)
- * name of output file
+# Inputs:
+# -------
+#  * tool1: name of first variant determination pipeline
+#  * tool2: name of second variant determination pipeline
+#  * a tab-separated file listing the aggregate counts
+#    of different genotype combinations in a 6-sample vcf, and
+#  * a pedigree file, storing the relationships of the samples
+#    (family IDs are the tool names)
+#  * name of output file
 
-Output:
--------
- * tab-separated file with schema
-   (father1
-   mother1
-   child1
-   father2
-   mother2
-   child2
-   count)
-   containing the genotype combinations and their counts.
-   (Phasing information and multiallelic sites are ignored.)
+# Output:
+# -------
+#  * tab-separated file with schema
+#    (father1
+#    mother1
+#    child1
+#    father2
+#    mother2
+#    child2
+#    count)
+#    containing the genotype combinations and their counts.
+#    (Phasing information and multiallelic sites are ignored.)
 
-"""
+
+# geck: Genotype Error Comparator Kit, for benchmarking genotyping tools
+# Copyright (C) 2017 Seven Bridges Genomics Inc.
+
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 
 import argparse

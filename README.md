@@ -1,16 +1,23 @@
-See Manuscript for detailed description.
+# Genotype Error Comparator Kit
 
-Genotype Error Comparator Kit is implemented as a python package ```geck```, which allows comparing the performance of two genotyping tools by their predictions on a family trio. It requires a joint histogram of genotype trio calls as input, and it fits a statistical mixture model and estimates the posterior distributions of genotype confusion matrices and benchmarking metrics: precision, recall, F-score.
+Genotype Error Comparator Kit is implemented as a python package ```geck```, which estimates and compares the accuracies of two genotyping methods using only their joint result on a family trio.
+
+```geck``` requires a joint histogram of genotype trio calls as input, and it fits a statistical mixture model and estimates the posterior distributions of genotype confusion matrices and benchmarking metrics: precision, recall, F-score.
 The image below illustrates the data processing pipeline involved. ```geck``` performs the steps marked by (b) and (c).
 
 ![](./overview.png)
+
+See pre-print ["geck: trio-based comparative benchmarking of variant calls"](https://www.biorxiv.org/content/early/2017/10/23/208116) by P. Komar and D. Kural for detailed description.
+
+## Licensing
+GECK is available under the GNU General Public License v3. The GPL v3 is an open-source license that guarantees the freedom to share and change the software, and to make sure it remains free software for all its users. Seven Bridges also offers a commercial license for GECK.  Please contact [legal@sbgenomics.com](mailto:legal@sbgenomics.com) for more information.
 
 ## Requirements
 This project requires Python 2.7, and numpy, scipy, pysam.
 
 ## Installation
-1. Clone repository
-2. Change current directory to cloned directory
+1. ```git clone https://github.com/sbg/geck.git```
+2. ```cd geck```
 3. ```pip install -e .```
 
 

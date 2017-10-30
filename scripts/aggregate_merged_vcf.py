@@ -1,25 +1,41 @@
 #!/usr/bin/env python
-"""
-This script counts number of variants 
-with each genotype combination across
-all samples in a merged vcf file.
 
-E.g. 
-if the input vcf contains the following genotypes,
-for a total of 4 variants
-    sample1  sample2  sample3
-    0|1      0|0      1|2
-    ./.      0|0      1|0
-    0|1      0|0      0|1
-    0|1      0|0      0|1
+# This script counts number of variants 
+# with each genotype combination across
+# all samples in a merged vcf file.
 
-then the output file will contain
-    sample1  sample2  sample3  count
-    0|1      0|0      1|2      1
-    ./.      0|0      1|0      1
-    0|1      0|0      0|1      2
+# E.g. 
+# if the input vcf contains the following genotypes,
+# for a total of 4 variants
+#     sample1  sample2  sample3
+#     0|1      0|0      1|2
+#     ./.      0|0      1|0
+#     0|1      0|0      0|1
+#     0|1      0|0      0|1
 
-"""
+# then the output file will contain
+#     sample1  sample2  sample3  count
+#     0|1      0|0      1|2      1
+#     ./.      0|0      1|0      1
+#     0|1      0|0      0|1      2
+
+
+# geck: Genotype Error Comparator Kit, for benchmarking genotyping tools
+# Copyright (C) 2017 Seven Bridges Genomics Inc.
+
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <https://www.gnu.org/licenses/>.
+
 
 import pysam
 import argparse

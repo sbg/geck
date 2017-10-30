@@ -1,33 +1,48 @@
 #!/usr/bin/env python
 
-"""
-This script calculates true benchmarking metrics from raw gt counts, obtained from 2-sample variant file (truth + calls).
-It performs two tasks:
+# This script calculates true benchmarking metrics from raw gt counts, obtained from 2-sample variant file (truth + calls).
+# It performs two tasks:
 
-1. Sanitizes raw counts, i.e.
- - removes multiallelic counts
- - disregards phasing (aggregates over them)
- - assumes reference allele for missing genotypes (i.e. '.' == '0')
+# 1. Sanitizes raw counts, i.e.
+#  - removes multiallelic counts
+#  - disregards phasing (aggregates over them)
+#  - assumes reference allele for missing genotypes (i.e. '.' == '0')
 
-2. Calculates benchmarking metrics.
+# 2. Calculates benchmarking metrics.
 
-Input:
--------
- * raw_counts_txt_1: TXT file produced by aggregate-calls-with-truth workflow for pipeline 1
- * raw_counts_txt_2: TXT file produced by aggregate-calls-with-truth workflow for pipeline 2
+# Input:
+# -------
+#  * raw_counts_txt_1: TXT file produced by aggregate-calls-with-truth workflow for pipeline 1
+#  * raw_counts_txt_2: TXT file produced by aggregate-calls-with-truth workflow for pipeline 2
 
-Outputs:
---------
- * tab-separated confusion matrix with scheme
-   (true genotype,
-   	called genotype,
-   	counts from comparing tool1 calls with truth,
-   	counts from comparing tool2 calls with truth)
- * benchmarking metrics JSON
-   lvl1: hard/soft
-   lvl2: percision/recall/Fscore
-   lvl3: tool1/tool2/diff
-"""
+# Outputs:
+# --------
+#  * tab-separated confusion matrix with scheme
+#    (true genotype,
+#    	called genotype,
+#    	counts from comparing tool1 calls with truth,
+#    	counts from comparing tool2 calls with truth)
+#  * benchmarking metrics JSON
+#    lvl1: hard/soft
+#    lvl2: percision/recall/Fscore
+#    lvl3: tool1/tool2/diff
+
+
+# geck: Genotype Error Comparator Kit, for benchmarking genotyping tools
+# Copyright (C) 2017 Seven Bridges Genomics Inc.
+
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 import argparse
 import json
