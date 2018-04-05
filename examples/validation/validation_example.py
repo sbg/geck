@@ -24,6 +24,8 @@
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 
+from __future__ import unicode_literals
+from io import open
 import sys
 import numpy
 sys.path.append('../../geck')
@@ -40,25 +42,25 @@ from postprocess import GeckResults
 tool_names = ['bwa+gatk', 'gral+hc']
 data_file = './N_validation_data.txt'
 
-print 'Loading data'
+print('Loading data')
 data = GeckData()
 data.load_file(tool_names, data_file)
 
-print 'Initializing Gibbs sampler'
+print('Initializing Gibbs sampler')
 solver = GeckSolverGibbs()
 solver.import_data(data)
 solver.n_array[0, 0] = 52054804
 # set number of unobserved "variants" to size of dbSNP
 
-print 'Running Gibbs sampler...'
+print('Running Gibbs sampler...')
 numpy.random.seed(12345)
 solver.run_sampling(burnin=5000,
                     every=100,
                     iterations=int(1e4),
                     verbose=True)
-print 'Done'
+print('Done')
 
-print 'Analyzing results...'
+print('Analyzing results...')
 person = 'family'  # could be any of ['father', 'mother', 'child', 'family']
 mode = 'hard'      # could be any of ['soft', 'hard', '00', '01', '11']
 
@@ -129,46 +131,46 @@ F_delta_truth = F2_truth - F1_truth
 #  3. Compare
 #############
 
-print 'Estimated joint confusion matrix, n[i,j,k] (' + str(person) + '):'
-print 'rows: GT called by {} (0/0, 0/1, 1/1)'.format(tool_names[0])
-print 'cols: GT called by {} (0/0, 0/1, 1/1)'.format(tool_names[1])
-print 'true GT: 0/0'
-print n_avg[0, :, :].astype(int)
-print 'true GT: 0/1'
-print n_avg[1, :, :].astype(int)
-print 'true GT: 1/1'
-print n_avg[2, :, :].astype(int)
-print ''
-print 'True joint confusion matrix, n[i,j,k] (' + str(person) + '):'
-print 'rows: GT called by {} (0/0, 0/1, 1/1)'.format(tool_names[0])
-print 'cols: GT called by {} (0/0, 0/1, 1/1)'.format(tool_names[1])
-print 'true GT: 0/0'
-print n_truth[0, :, :].astype(int)
-print 'true GT: 0/1'
-print n_truth[1, :, :].astype(int)
-print 'true GT: 1/1'
-print n_truth[2, :, :].astype(int)
-print ''
+print('Estimated joint confusion matrix, n[i,j,k] (' + str(person) + '):')
+print('rows: GT called by {} (0/0, 0/1, 1/1)'.format(tool_names[0]))
+print('cols: GT called by {} (0/0, 0/1, 1/1)'.format(tool_names[1]))
+print('true GT: 0/0')
+print(n_avg[0, :, :].astype(int))
+print('true GT: 0/1')
+print(n_avg[1, :, :].astype(int))
+print('true GT: 1/1')
+print(n_avg[2, :, :].astype(int))
+print('')
+print('True joint confusion matrix, n[i,j,k] (' + str(person) + '):')
+print('rows: GT called by {} (0/0, 0/1, 1/1)'.format(tool_names[0]))
+print('cols: GT called by {} (0/0, 0/1, 1/1)'.format(tool_names[1]))
+print('true GT: 0/0')
+print(n_truth[0, :, :].astype(int))
+print('true GT: 0/1')
+print(n_truth[1, :, :].astype(int))
+print('true GT: 1/1')
+print(n_truth[2, :, :].astype(int))
+print('')
 
 
 # Compare estimated F-scores with true F-scores
-print 'Estimated F score (' + str(mode) + ')' + \
-    ' (+ 5th, 95th percentiles) (' + str(person) + '):'
-print tool_names[0] + ': ' + str(F1_avg) + \
-    ' (' + str(F1_low) + ', ' + str(F1_high) + ')'
-print tool_names[1] + ': ' + str(F2_avg) + \
-    ' (' + str(F2_low) + ', ' + str(F2_high) + ')'
-print 'diff: ' + str(F_delta_avg) + \
-    ' (' + str(F_delta_low) + ', ' + str(F_delta_high) + ')'
-print ''
-print 'True F score (' + str(mode) + ') ' + '(' + str(person) + '):'
-print tool_names[0] + ': ' + str(F1_truth)
-print tool_names[1] + ': ' + str(F2_truth)
-print 'diff: ' + str(F_delta_truth)
-print ''
+print('Estimated F score (' + str(mode) + ')' + 
+    ' (+ 5th, 95th percentiles) (' + str(person) + '):')
+print(tool_names[0] + ': ' + str(F1_avg) + 
+    ' (' + str(F1_low) + ', ' + str(F1_high) + ')')
+print(tool_names[1] + ': ' + str(F2_avg) + 
+    ' (' + str(F2_low) + ', ' + str(F2_high) + ')')
+print('diff: ' + str(F_delta_avg) + 
+    ' (' + str(F_delta_low) + ', ' + str(F_delta_high) + ')')
+print('')
+print('True F score (' + str(mode) + ') ' + '(' + str(person) + '):')
+print(tool_names[0] + ': ' + str(F1_truth))
+print(tool_names[1] + ': ' + str(F2_truth))
+print('diff: ' + str(F_delta_truth))
+print('')
 
 
 # Full report of estimated values
-print results.report_metrics(mode='all',
+print(results.report_metrics(mode='all',
                              person='all',
-                             percentiles=(0.05, 0.95))
+                             percentiles=(0.05, 0.95)))

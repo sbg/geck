@@ -33,10 +33,10 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-
 """Usage:
     run_fastq_purge [--debug] <fq1_in> <fq2_in> [(-o <fq1_out> <fq2_out>)]
 """
+from __future__ import unicode_literals
 from docopt import docopt
 from fastq_purge import purge_fastq_pair, check_consistency
 
@@ -54,17 +54,17 @@ if __name__ == '__main__':
         fq2_out = '.'.join(fq2_in.split('.')[:-1]) + '_purged.' + fq2_in.split('.')[-1]
 
     if debug:
-        print 'Checking consistency of Fastq files ' + fq1_in + ' and ' + fq2_in
+        print('Checking consistency of Fastq files ' + fq1_in + ' and ' + fq2_in)
         if check_consistency(fq1_in, fq2_in):
-            print 'Consistent.'
-            print 'Exiting.'
+            print('Consistent.')
+            print('Exiting.')
             exit(0)
 
-    print 'Purging Fastq files, ' + fq1_in + ' and ' + fq2_in
+    print('Purging Fastq files, ' + fq1_in + ' and ' + fq2_in)
     purge_fastq_pair(fq1_in, fq2_in, fq1_out, fq2_out)
-    print 'Finished.'
+    print('Finished.')
 
     if debug:
-        print 'Checking consistency of Fastq files, ' + fq1_out + ' and ' + fq2_out
+        print('Checking consistency of Fastq files, ' + fq1_out + ' and ' + fq2_out)
         if check_consistency(fq1_out, fq2_out):
-            print 'Consistent.'
+            print('Consistent.')

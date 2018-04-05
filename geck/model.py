@@ -14,6 +14,7 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
+from __future__ import unicode_literals
 import itertools
 import numpy as np
 
@@ -268,7 +269,7 @@ class GeckModel:
             assert np.array(alpha).shape == \
                 expected_shape, 'alpha must have shape ' \
                                 + str(expected_shape)
-        return np.random.dirichlet(alpha)
+        return np.random.dirichlet(alpha + 1e-20)
 
     def random_theta(self, alpha=None):
         """Samples :math:`\\theta`
@@ -300,7 +301,7 @@ class GeckModel:
         theta = np.zeros(expected_shape)
         for c_idx, c in enumerate(self.groups):
             # deterministically 0.0 where the input is 0.0
-            theta[c_idx, :] = np.random.dirichlet(alpha[c_idx, :])
+            theta[c_idx, :] = np.random.dirichlet(alpha[c_idx, :] + 1e-20)
         return theta
 
     def random_e_array(self, alpha=None):
@@ -336,7 +337,7 @@ class GeckModel:
             for i_idx, i in enumerate(self.ig):
                 alpha_mi_vec = alpha[m_idx, i_idx, :, :].flatten()
                 # deterministically 0.0 where the input is 0.0
-                e_array_mi_vec = np.random.dirichlet(alpha_mi_vec)
+                e_array_mi_vec = np.random.dirichlet(alpha_mi_vec + 1e-20)
                 e_array[m_idx, i_idx, :, :] = e_array_mi_vec.reshape((3, 3))
         return e_array
 

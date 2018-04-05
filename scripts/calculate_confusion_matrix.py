@@ -46,6 +46,8 @@
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 
+from __future__ import unicode_literals
+from io import open
 import argparse
 
 gt_map = {
@@ -110,7 +112,7 @@ def write_confusion_matrix(out_path, confusion_matrix):
                        'count']
     with open(out_path, 'w') as out:
         out.write('\t'.join(new_header_list) + '\n')
-        sorted_keys = sorted(confusion_matrix.keys())
+        sorted_keys = sorted(list(confusion_matrix.keys()))
         for key in sorted_keys:
             record = list(key) + [str(confusion_matrix[key])]
             out.write('\t'.join(record) + '\n')

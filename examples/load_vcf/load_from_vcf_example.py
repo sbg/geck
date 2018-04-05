@@ -24,6 +24,7 @@
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 
+from __future__ import unicode_literals
 import sys
 import numpy
 sys.path.append('../../geck')
@@ -41,6 +42,6 @@ for var_type in ['snp', 'indel', 'del', 'ins', 'mnp', 'all']:
         tool_names,
         vcf_file,
         ped_file)
-    print var_type + ': ' + str(sum(data.data_dict.values()))
+    print(var_type + ': ' + str(sum(data.data_dict.values())))
     # tab-delimited csv with header and one entry each line
     data.save_data('./' + var_type +'_counts_in_list_format.txt')

@@ -14,6 +14,8 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
+from __future__ import unicode_literals
+from io import open
 import numpy as np
 from pysam import VariantFile
 import itertools
@@ -81,7 +83,7 @@ class GeckData:
                 trio = (paternal_id, maternal_id, individual_id)
                 trios[family_id] = trio
         samples_in_ped = [trios[k][i] for
-                          k, i in itertools.product(trios.keys(), range(3))]
+                          k, i in itertools.product(list(trios.keys()), list(range(3)))]
 
         # load genotypes from variant file
         vcf_reader = VariantFile(vcf_fullpath)
@@ -127,7 +129,7 @@ class GeckData:
             for tool in tool_names:
                 trio_gt = []
                 for sample in trios[tool]:
-                    allele_indices = variant.samples[sample].allele_indices
+                    allele_indices = variant.samples[sample.encode('ascii','ignore')].allele_indices
                     sample_gt = ''.join([map_gt[ai] for ai in allele_indices])
                     trio_gt.append(sample_gt)
                 trio_gts.append(tuple(trio_gt))
@@ -282,7 +284,7 @@ class GeckData:
                                     'father2', 'mother2', 'child2',
                                     'count']) + '\n'
                 out_file.write(header)
-                sorted_keys = sorted(self.data_dict.keys())
+                sorted_keys = sorted(list(self.data_dict.keys()))
                 for key in sorted_keys:
                     g1 = list(key[0])
                     g2 = list(key[1])
@@ -292,7 +294,7 @@ class GeckData:
 
         elif format == 'matrix' and sort_order is not None:
             data_matrix = self.get_data_matrix(sort_order).astype(int)
-            np.savetxt(out_fullpath, data_matrix, fmt='%i', delimiter='\t')
+            np.savetxt(out_fullpath, data_matrix, fmt='%i'.encode('ascii','ignore'), delimiter='\t')
         else:
             raise ValueError('format must be "list" or "matrix", \
                               and sort_order must be specified')

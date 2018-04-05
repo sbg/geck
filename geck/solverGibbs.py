@@ -14,6 +14,7 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
+from __future__ import unicode_literals
 import numpy as np
 from model import GeckModel
 
@@ -106,7 +107,7 @@ class GeckSolverGibbs(GeckModel):
 
         """
         alpha = self.f_alpha_prior + np.einsum('GHgm->g', n_array_complete)
-        f = np.random.dirichlet(alpha)
+        f = np.random.dirichlet(alpha + 1e-20)
         return f
 
     def _sample_theta(self, n_array_complete):
@@ -128,7 +129,7 @@ class GeckSolverGibbs(GeckModel):
             np.einsum('GHgm,cg->cm', n_array_complete, self.q_array)
         theta = np.zeros((lenc, lenm))
         for c_idx in range(lenc):
-            theta[c_idx, :] = np.random.dirichlet(beta[c_idx, :])
+            theta[c_idx, :] = np.random.dirichlet(beta[c_idx, :] + 1e-20)
         return theta
 
     def _sample_e_array(self, n_array_complete):
@@ -156,7 +157,7 @@ class GeckSolverGibbs(GeckModel):
             for i_idx in range(len_i):
                 gamma_mi_vec = gamma[m_idx, i_idx, :, :].flatten()
                 e_array[m_idx, i_idx, :, :] = \
-                    np.random.dirichlet(gamma_mi_vec).reshape((len_i, len_i))
+                    np.random.dirichlet(gamma_mi_vec + 1e-20).reshape((len_i, len_i))
                 if np.argmax(e_array[m_idx, i_idx, :, :]) != 4 * i_idx:
                     e_array[m_idx, i_idx, i_idx, i_idx] = \
                         np.max(e_array[m_idx, i_idx, :, :])
@@ -257,12 +258,12 @@ class GeckSolverGibbs(GeckModel):
                     if resample_e_array else self._sample_e_array(
                         n_array_complete)
                 if verbose and it % 1000 == 0:
-                    print str(it) + ' iterations done, burning in'
+                    print(str(it) + ' iterations done, burning in')
         except KeyboardInterrupt:
-            print 'Warning: User interrupt. No samples collected. Exiting...'
+            print('Warning: User interrupt. No samples collected. Exiting...')
             exit(1)
         if verbose and burnin > 0:
-            print str(burnin) + ' iterations burned'
+            print(str(burnin) + ' iterations burned')
 
         try:
             for it in range(iterations):
@@ -285,10 +286,10 @@ class GeckSolverGibbs(GeckModel):
                     self.parameter_samples.append((f, theta, e_array))
                     self.n_array_complete_samples.append(n_array_complete)
                 if verbose and it % 1000 == 0:
-                    print str(it) + ' iterations done, ' + str(it / every) + \
-                        ' samples collected'
+                    print(str(it) + ' iterations done, ' + str(it // every) + 
+                        ' samples collected')
         except KeyboardInterrupt:
-            print 'Warning: User interrupt.'
+            print('Warning: User interrupt.')
         if verbose:
-            print str(iterations) + ' iterations done, ' + \
-                str(iterations / every) + ' samples collected'
+            print(str(iterations) + ' iterations done, ' + 
+                str(iterations // every) + ' samples collected')

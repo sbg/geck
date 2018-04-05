@@ -13,7 +13,7 @@ See pre-print ["geck: trio-based comparative benchmarking of variant calls"](htt
 GECK is available under the GNU General Public License v3. The GPL v3 is an open-source license that guarantees the freedom to share and change the software, and to make sure it remains free software for all its users. Seven Bridges also offers a commercial license for GECK.  Please contact [legal@sbgenomics.com](mailto:legal@sbgenomics.com) for more information.
 
 ## Requirements
-This project requires Python 2.7, and numpy, scipy, pysam.
+This project requires Python 2.7 or 3.6, and numpy, scipy, pysam.
 
 ## Installation
 1. ```git clone https://github.com/sbg/geck.git```

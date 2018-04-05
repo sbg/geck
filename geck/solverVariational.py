@@ -14,6 +14,7 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
+from __future__ import unicode_literals
 import numpy as np
 from scipy.special import digamma, gammaln
 
@@ -430,10 +431,10 @@ class GeckSolverVariational(GeckModel):
                                        self.theta_alpha,
                                        self.e_alpha))
                     if verbose and it % 1000 == 0:
-                        print str(it) + \
-                            ' iterations done, ' +\
-                            'log-likelihood lower bound: ' + \
-                            str(var_lower_bound)
+                        print(str(it) + 
+                            ' iterations done, ' +
+                            'log-likelihood lower bound: ' + 
+                            str(var_lower_bound))
                 f_alpha_prev = self.f_alpha.copy()
                 theta_alpha_prev = self.theta_alpha.copy()
                 e_alpha_prev = self.e_alpha.copy()
@@ -447,9 +448,9 @@ class GeckSolverVariational(GeckModel):
 
                 it += 1
             if it >= iter_max:
-                print 'Warning: iter_max reached, EM did not reach target'
+                print('Warning: iter_max reached, EM did not reach target')
         except KeyboardInterrupt:
-            print 'Warning: User interrupt, EM did not reach target.'
+            print('Warning: User interrupt, EM did not reach target.')
             pass
         return iterations
 

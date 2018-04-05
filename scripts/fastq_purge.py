@@ -17,6 +17,8 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
+from __future__ import unicode_literals
+from io import open
 
 class Read:
     def __init__(self):
@@ -85,8 +87,8 @@ def check_sorting(fq_path):
         r2 = reads.next()
         while True:
             if r1 > r2:
-                print r1.print_fq()
-                print r2.print_fq()
+                print(r1.print_fq())
+                print(r2.print_fq())
                 return False
             try:
                 r1 = r2
@@ -103,14 +105,14 @@ def check_consistency(fq1_path, fq2_path):
             try:
                 r2 = reads2.next()
             except StopIteration:
-                print 'Extra line in fq_1:\n' + r1.print_fq()
+                print('Extra line in fq_1:\n' + r1.print_fq())
                 return False
             if r1.name != r2.name:
-                print 'Non-matching lines:\n' + 'fq_1:\n' + r1.print_fq() + '\nfq_2:\n' + r2.print_fq()
+                print('Non-matching lines:\n' + 'fq_1:\n' + r1.print_fq() + '\nfq_2:\n' + r2.print_fq())
                 return False
         try:
             r2 = reads2.next()
-            print 'Extra line in fq_2:\n' + r2.print_fq()
+            print('Extra line in fq_2:\n' + r2.print_fq())
         except StopIteration:
             return True
 

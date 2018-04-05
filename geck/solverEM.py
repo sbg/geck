@@ -14,6 +14,7 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
+from __future__ import unicode_literals
 import numpy as np
 from model import GeckModel
 
@@ -424,8 +425,8 @@ class GeckSolverEM(GeckModel):
                          self.theta_array,
                          self.e_array))
                     if verbose and it % 1000 == 0:
-                        print str(it) + ' iterations done, log-likelihood: ' \
-                            + str(log_likelihood)
+                        print(str(it) + ' iterations done, log-likelihood: '
+                            + str(log_likelihood))
                 f_prev = self.f_array.copy()
                 theta_prev = self.theta_array.copy()
                 e_array_prev = self.e_array.copy()
@@ -439,12 +440,12 @@ class GeckSolverEM(GeckModel):
 
                 it += 1
             if verbose:
-                print str(it) + ' iterations done, log-likelihood: ' \
-                    + str(log_likelihood)
+                print(str(it) + ' iterations done, log-likelihood: '
+                    + str(log_likelihood))
             if it >= iter_max:
-                print 'Warning: iter_max reached, EM did not reach target'
+                print('Warning: iter_max reached, EM did not reach target')
         except KeyboardInterrupt:
-            print 'Warning: User interrupt, EM did not reach target.'
+            print('Warning: User interrupt, EM did not reach target.')
             pass
         return iterations
 

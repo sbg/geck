@@ -36,7 +36,8 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-
+from __future__ import unicode_literals
+from io import open
 import pysam
 import argparse
 
@@ -74,7 +75,7 @@ with pysam.VariantFile(input_path, 'r') as vcf:
         counts[gt] = counts[gt] + 1 if gt in counts else 1
 
 # write output
-gts = sorted(counts.keys())
+gts = sorted(list(counts.keys()))
 with open(output_path, 'w') as f_out:
     header = [s for s in sample_strs] + ['count']
     f_out.write('\t'.join(header) + '\n')

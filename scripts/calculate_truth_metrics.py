@@ -44,6 +44,8 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
+from __future__ import unicode_literals
+from io import open
 import argparse
 import json
 
@@ -165,7 +167,7 @@ def write_confusion_counts(confusion_matrix1, confusion_matrix2, output_path):
     header_list = ['truth', 'calls', 'count_tool1', 'count_tool2']
     with open(output_path, 'w') as out:
         out.write('\t'.join(header_list) + '\n')
-        sorted_keys = sorted(confusion_matrix1.keys())
+        sorted_keys = sorted(list(confusion_matrix1.keys()))
         for key in sorted_keys:
             record = [key[0], key[1], str(confusion_matrix1[key]), str(confusion_matrix2[key])]
             out.write('\t'.join(record) + '\n')
